@@ -10,7 +10,7 @@ import {
   Avatar,
   Box,
   LinearProgress,
-} from '@mui/material';
+} from "@mui/material";
 
 export default function StudentPerformance({ students }) {
   return (
@@ -32,32 +32,32 @@ export default function StudentPerformance({ students }) {
             {students.map((student) => (
               <TableRow key={student.id}>
                 <TableCell>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                     <Avatar src={student.avatar} />
-                    <Typography variant="body2">
-                      {student.name}
-                    </Typography>
+                    <Typography variant="body2">{student.name}</Typography>
                   </Box>
                 </TableCell>
                 <TableCell>{student.course}</TableCell>
                 <TableCell>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                     <LinearProgress
                       variant="determinate"
                       value={student.progress}
                       sx={{ flexGrow: 1 }}
                     />
-                    <Typography variant="body2">
-                      {student.progress}%
-                    </Typography>
+                    <Typography variant="body2">{student.progress}%</Typography>
                   </Box>
                 </TableCell>
                 <TableCell align="right">
                   <Typography
                     variant="body2"
                     sx={{
-                      color: student.grade >= 80 ? 'success.main' : 
-                             student.grade >= 70 ? 'warning.main' : 'error.main'
+                      color:
+                        student.grade >= 80
+                          ? "success.main"
+                          : student.grade >= 70
+                          ? "warning.main"
+                          : "error.main",
                     }}
                   >
                     {student.grade}%

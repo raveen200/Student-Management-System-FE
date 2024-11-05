@@ -5,7 +5,7 @@ import {
   ListItemText,
   Chip,
   Paper,
-} from '@mui/material';
+} from "@mui/material";
 
 export default function AssignmentList({ assignments }) {
   return (
@@ -32,7 +32,11 @@ export default function AssignmentList({ assignments }) {
                 </Typography>
               }
               secondary={
-                <Typography component="div" variant="body2" color="text.secondary">
+                <Typography
+                  component="div"
+                  variant="body2"
+                  color="text.secondary"
+                >
                   {assignment.course}
                 </Typography>
               }

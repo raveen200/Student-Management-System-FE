@@ -8,7 +8,7 @@ import {
   Avatar,
   LinearProgress,
   Paper,
-} from '@mui/material';
+} from "@mui/material";
 
 export default function CourseProgress({ courses }) {
   return (
@@ -30,16 +30,25 @@ export default function CourseProgress({ courses }) {
               }
               secondary={
                 <Box component="div" sx={{ mt: 1 }}>
-                  <Typography component="div" variant="body2" color="text.secondary" gutterBottom>
+                  <Typography
+                    component="div"
+                    variant="body2"
+                    color="text.secondary"
+                    gutterBottom
+                  >
                     Next: {course.nextLesson}
                   </Typography>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                     <LinearProgress
                       variant="determinate"
                       value={course.progress}
                       sx={{ flexGrow: 1 }}
                     />
-                    <Typography component="span" variant="body2" color="text.secondary">
+                    <Typography
+                      component="span"
+                      variant="body2"
+                      color="text.secondary"
+                    >
                       {course.progress}%
                     </Typography>
                   </Box>

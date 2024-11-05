@@ -25,6 +25,7 @@ import {
   Share2,
 } from "lucide-react";
 import Grid from "@mui/material/Grid2";
+import CustomTextField from "../components/ui/CustomTextField";
 
 const courses = [
   {
@@ -98,7 +99,7 @@ export default function CourseSelection() {
   const [selectedLevel, setSelectedLevel] = useState("All");
   const [selectedCourses, setSelectedCourses] = useState([]);
 
-  console.log(selectedCourses);
+  // console.log(selectedCourses);
 
   const addCourse = (course) => {
     if (
@@ -135,18 +136,15 @@ export default function CourseSelection() {
       <Paper sx={{ p: 3, mb: 4 }}>
         <Grid container spacing={3}>
           <Grid size xs={12} md={6}>
-            <TextField
-              fullWidth
-              placeholder="Search courses..."
+            <CustomTextField
+              label="Search courses"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search size={20} />
-                  </InputAdornment>
-                ),
-              }}
+              startAdornment={
+                <InputAdornment position="start">
+                  <Search size={20} />
+                </InputAdornment>
+              }
             />
           </Grid>
           <Grid size xs={12} md={6}>

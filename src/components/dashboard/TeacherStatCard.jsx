@@ -1,10 +1,10 @@
-import { Paper, Typography, Box } from '@mui/material';
+import { Paper, Typography, Box } from "@mui/material";
 
 export default function TeacherStatCard({ icon, title, value, subtitle }) {
   return (
     <Paper sx={{ p: 3 }}>
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Box sx={{ p: 1, borderRadius: 1, bgcolor: 'primary.light' }}>
+      <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+        <Box sx={{ p: 1, borderRadius: 1, bgcolor: "primary.light" }}>
           {icon}
         </Box>
         <Box>
