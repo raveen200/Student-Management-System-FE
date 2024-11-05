@@ -11,13 +11,14 @@ import {
 } from "@mui/material";
 
 import propsTypes from "prop-types";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { menuItems } from "../constants";
 
 const drawerWidth = 240;
 
 export default function Sidebar({ open, onClose }) {
   const theme = useTheme();
+  const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
@@ -27,7 +28,11 @@ export default function Sidebar({ open, onClose }) {
     <Box sx={{ overflow: "auto", mt: 8 }}>
       <List>
         {menuItems.map((item) => (
-          <ListItem key={item.text} disablePadding>
+          <ListItem
+            key={item.text}
+            onClick={() => navigate(item.path)}
+            disablePadding
+          >
             <ListItemButton>
               <ListItemIcon sx={{ color: "primary.main" }}>
                 {item.icon}

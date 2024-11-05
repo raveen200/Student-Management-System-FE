@@ -209,7 +209,10 @@ export const categories = [
 export const levels = ["All", "Beginner", "Intermediate", "Advanced"];
 
 export const menuItems = [
-  { text: "Home", icon: <Home size={20} /> },
-  { text: "Dashboard", icon: <LayoutDashboard size={20} /> },
-  { text: "Users", icon: <Users size={20} /> },
+  { text: "Dashboard", icon: <Home size={20} />, path: "/dashboard" },
+  { text: "Dashboard2", icon: <Award size={20} />, path: "/teacher-dashboard" },
+  { text: "login", icon: <Users size={20} />, path: "/login" },
+  { text: "signup", icon: <Award size={20} />, path: "/signup" },
+  { text: "Students", icon: <Users size={20} />, path: "/courseselection" },
+  { text: "Courses", icon: <LayoutDashboard size={20} />, path: "/addcourses" },
 ];
