@@ -9,27 +9,12 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import {
-  Home,
-  LayoutDashboard,
-  Users,
-  Settings,
-  HelpCircle,
-  FileText,
-} from "lucide-react";
+
 import propsTypes from "prop-types";
 import { useLocation } from "react-router-dom";
+import { menuItems } from "../constants";
 
 const drawerWidth = 240;
-
-const menuItems = [
-  { text: "Home", icon: <Home size={20} /> },
-  { text: "Dashboard", icon: <LayoutDashboard size={20} /> },
-  { text: "Users", icon: <Users size={20} /> },
-  { text: "Documents", icon: <FileText size={20} /> },
-  { text: "Settings", icon: <Settings size={20} /> },
-  { text: "Help", icon: <HelpCircle size={20} /> },
-];
 
 export default function Sidebar({ open, onClose }) {
   const theme = useTheme();

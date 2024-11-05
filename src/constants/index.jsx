@@ -1,4 +1,4 @@
-import { Award, TrendingUp } from "lucide-react";
+import { Award, Home, LayoutDashboard, TrendingUp, Users } from "lucide-react";
 
 export const cartState = {
   items: [
@@ -199,5 +199,17 @@ export const courses = [
     level: "Advanced",
   },
 ];
-export const categories = ["All", "Development", "Data Science", "Design", "Business"];
+export const categories = [
+  "All",
+  "Development",
+  "Data Science",
+  "Design",
+  "Business",
+];
 export const levels = ["All", "Beginner", "Intermediate", "Advanced"];
+
+export const menuItems = [
+  { text: "Home", icon: <Home size={20} /> },
+  { text: "Dashboard", icon: <LayoutDashboard size={20} /> },
+  { text: "Users", icon: <Users size={20} /> },
+];

@@ -4,7 +4,7 @@ import Grid from "@mui/material/Grid2";
 import TeacherStatCard from "../components/dashboard/TeacherStatCard";
 import ClassSchedule from "../components/dashboard/ClassSchedule";
 import StudentPerformance from "../components/dashboard/StudentPerformance";
-import { todayClasses, studentPerformance } from "../constants";
+import { todayClasses, studentPerformance } from "../constants/index";
 
 export default function TeacherDashboard() {
   return (

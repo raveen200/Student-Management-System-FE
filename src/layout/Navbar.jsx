@@ -8,13 +8,7 @@ import {
   Menu,
   MenuItem,
 } from "@mui/material";
-import {
-  Menu as MenuIcon,
-  Bell,
-  User,
-  Badge,
-  ShoppingCart,
-} from "lucide-react";
+import { User, ShoppingCart } from "lucide-react";
 import propsTypes from "prop-types";
 import Logo from "../assets/logo.png";
 import { useLocation } from "react-router-dom";
