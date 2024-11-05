@@ -1,5 +1,5 @@
 import { Paper, Typography } from "@mui/material";
-
+// eslint-disable-next-line react/prop-types
 export default function StatCard({ icon, title, value }) {
   return (
     <Paper sx={{ p: 3, textAlign: "center" }}>

@@ -7,36 +7,29 @@ import {
   FormHelperText,
 } from "@mui/material";
 import { Controller } from "react-hook-form";
+import PropTypes from "prop-types";
 
-function CustomRadio({
-  title,
-  roleType,
-  name,
-  control,
-  error,
-  value,
-  onChange,
-}) {
+function CustomRadio(props) {
   const capitalizeFirstLetter = (string) => {
     return string.charAt(0).toUpperCase() + string.slice(1);
   };
   return (
-    <FormControl component="fieldset" sx={{ mt: 2 }} error={!!error}>
-      <FormLabel component="legend">{title}</FormLabel>
+    <FormControl component="fieldset" sx={{ mt: 2 }} error={!!props.error}>
+      <FormLabel component="legend">{props.title}</FormLabel>
       <Controller
-        name={name}
-        control={control}
+        name={props.name}
+        control={props.control}
         render={({ field }) => (
           <RadioGroup
             row
             {...field}
-            value={value}
+            value={props.value}
             onChange={(e) => {
-              onChange(e.target.value);
+              props.onChange(e.target.value);
               field.onChange(e);
             }}
           >
-            {roleType.map((role) => (
+            {props.roleType.map((role) => (
               <FormControlLabel
                 key={role}
                 value={role}
@@ -58,9 +51,19 @@ function CustomRadio({
           </RadioGroup>
         )}
       />
-      {error && <FormHelperText>{error.message}</FormHelperText>}
+      {props.error && <FormHelperText>{props.error.message}</FormHelperText>}
     </FormControl>
   );
 }
 
 export default CustomRadio;
+
+CustomRadio.propTypes = {
+  title: PropTypes.string,
+  name: PropTypes.string,
+  control: PropTypes.object,
+  value: PropTypes.string,
+  onChange: PropTypes.func,
+  roleType: PropTypes.arrayOf(PropTypes.string),
+  error: PropTypes.object,
+};

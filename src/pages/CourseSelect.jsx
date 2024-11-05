@@ -3,7 +3,6 @@ import {
   Box,
   Paper,
   Typography,
-  TextField,
   InputAdornment,
   Chip,
   Rating,
@@ -26,80 +25,13 @@ import {
 } from "lucide-react";
 import Grid from "@mui/material/Grid2";
 import CustomTextField from "../components/ui/CustomTextField";
-
-const courses = [
-  {
-    id: 1,
-    title: "Advanced Web Development",
-    instructor: "Dr. Sarah Chen",
-    description:
-      "Master modern web technologies including React, Node.js, and cloud deployment.",
-    price: 499,
-    duration: 12,
-    capacity: 30,
-    enrolled: 18,
-    rating: 4.8,
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
-    category: "Development",
-    level: "Advanced",
-  },
-  {
-    id: 2,
-    title: "Data Science Fundamentals",
-    instructor: "Prof. Michael Brown",
-    description:
-      "Learn essential data science concepts, Python programming, and statistical analysis.",
-    price: 599,
-    duration: 10,
-    capacity: 25,
-    enrolled: 20,
-    rating: 4.9,
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
-    category: "Data Science",
-    level: "Beginner",
-  },
-  {
-    id: 3,
-    title: "UX/UI Design Principles",
-    instructor: "Emma Wilson",
-    description:
-      "Master the fundamentals of user experience and interface design.",
-    price: 449,
-    duration: 8,
-    capacity: 20,
-    enrolled: 12,
-    rating: 4.7,
-    image: "https://images.unsplash.com/photo-1513542789411-b6a5d4f31634",
-    category: "Design",
-    level: "Intermediate",
-  },
-  {
-    id: 4,
-    title: "Machine Learning Essentials",
-    instructor: "Dr. James Rodriguez",
-    description:
-      "Explore core machine learning algorithms and their practical applications.",
-    price: 699,
-    duration: 14,
-    capacity: 25,
-    enrolled: 15,
-    rating: 4.9,
-    image: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4",
-    category: "Data Science",
-    level: "Advanced",
-  },
-];
-
-const categories = ["All", "Development", "Data Science", "Design", "Business"];
-const levels = ["All", "Beginner", "Intermediate", "Advanced"];
+import { courses, categories, levels } from "../constants/index";
 
 export default function CourseSelection() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedLevel, setSelectedLevel] = useState("All");
   const [selectedCourses, setSelectedCourses] = useState([]);
-
-  // console.log(selectedCourses);
 
   const addCourse = (course) => {
     if (

@@ -6,7 +6,7 @@ import {
   Chip,
   Paper,
 } from "@mui/material";
-
+// eslint-disable-next-line react/prop-types
 export default function AssignmentList({ assignments }) {
   return (
     <Paper sx={{ p: 3 }}>

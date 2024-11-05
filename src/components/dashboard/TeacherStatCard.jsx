@@ -1,5 +1,5 @@
 import { Paper, Typography, Box } from "@mui/material";
-
+// eslint-disable-next-line react/prop-types
 export default function TeacherStatCard({ icon, title, value, subtitle }) {
   return (
     <Paper sx={{ p: 3 }}>

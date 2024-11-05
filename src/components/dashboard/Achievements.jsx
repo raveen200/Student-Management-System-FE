@@ -7,6 +7,7 @@ import {
   Paper,
 } from "@mui/material";
 
+// eslint-disable-next-line react/prop-types
 export default function Achievements({ achievements }) {
   return (
     <Paper sx={{ p: 3 }}>

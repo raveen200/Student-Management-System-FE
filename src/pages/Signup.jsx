@@ -11,7 +11,7 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import { Mail, Lock, User, Upload, Loader2 } from "lucide-react";
+import {  User, Upload, Loader2 } from "lucide-react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../schema/yupSchema";
 import CustomTextField from "../components/ui/CustomTextField";

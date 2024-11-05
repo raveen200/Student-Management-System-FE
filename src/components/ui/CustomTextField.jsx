@@ -4,6 +4,7 @@ import {
   InputLabel,
   OutlinedInput,
 } from "@mui/material";
+import PropTypes from "prop-types";
 
 function CustomTextField(props) {
   return (
@@ -26,3 +27,16 @@ function CustomTextField(props) {
 }
 
 export default CustomTextField;
+
+CustomTextField.propTypes = {
+  label: PropTypes.string,
+  type: PropTypes.string,
+  error: PropTypes.bool,
+  helperText: PropTypes.string,
+  register: PropTypes.object,
+  endAdornment: PropTypes.object,
+  startAdornment: PropTypes.object,
+  multiline: PropTypes.bool,
+  rows: PropTypes.number,
+  onChange: PropTypes.func,
+};

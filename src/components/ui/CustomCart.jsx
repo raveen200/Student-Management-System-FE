@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import { X, Trash2 } from "lucide-react";
 import { cartState as state } from "../../constants/index";
-
+// eslint-disable-next-line react/prop-types
 export default function CartDrawer({ open, onClose }) {
   const handleRemoveItem = (id) => {
     // Remove item from cart

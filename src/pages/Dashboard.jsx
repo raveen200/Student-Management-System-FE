@@ -1,69 +1,16 @@
 import { useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import {
-  BookOpen,
-  Clock,
-  Calendar,
-  Award,
-  TrendingUp,
-  Bell,
-} from "lucide-react";
+import { BookOpen, Clock, Calendar, Bell } from "lucide-react";
 import StatCard from "../components/dashboard/StatCard";
 import CourseProgress from "../components/dashboard/CourseProgress";
 import Achievements from "../components/dashboard/Achievements";
 import AssignmentList from "../components/dashboard/AssignmentList";
-
-const enrolledCourses = [
-  {
-    id: 1,
-    title: "Advanced Web Development",
-    progress: 75,
-    nextLesson: "React Hooks Deep Dive",
-    instructor: "Dr. Sarah Chen",
-    image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97",
-  },
-  {
-    id: 2,
-    title: "Data Science Fundamentals",
-    progress: 45,
-    nextLesson: "Statistical Analysis",
-    instructor: "Prof. Michael Brown",
-    image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71",
-  },
-];
-
-const upcomingAssignments = [
-  {
-    id: 1,
-    title: "React Project Submission",
-    course: "Advanced Web Development",
-    dueDate: "2024-03-20",
-    status: "pending",
-  },
-  {
-    id: 2,
-    title: "Data Analysis Report",
-    course: "Data Science Fundamentals",
-    dueDate: "2024-03-22",
-    status: "pending",
-  },
-];
-
-const achievements = [
-  {
-    id: 1,
-    title: "Perfect Attendance",
-    description: "Attended all classes for 30 days",
-    icon: <Award size={24} />,
-  },
-  {
-    id: 2,
-    title: "Quick Learner",
-    description: "Completed 5 courses in record time",
-    icon: <TrendingUp size={24} />,
-  },
-];
+import {
+  enrolledCourses,
+  upcomingAssignments,
+  achievements,
+} from "../constants/index";
 
 export default function Dashboard() {
   const [notifications] = useState(3);

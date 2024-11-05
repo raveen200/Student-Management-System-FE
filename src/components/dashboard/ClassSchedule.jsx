@@ -7,7 +7,7 @@ import {
   Box,
   Avatar,
 } from "@mui/material";
-
+// eslint-disable-next-line react/prop-types
 export default function ClassSchedule({ classes }) {
   const getStatusColor = (status) => {
     switch (status) {

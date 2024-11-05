@@ -4,65 +4,7 @@ import Grid from "@mui/material/Grid2";
 import TeacherStatCard from "../components/dashboard/TeacherStatCard";
 import ClassSchedule from "../components/dashboard/ClassSchedule";
 import StudentPerformance from "../components/dashboard/StudentPerformance";
-
-const todayClasses = [
-  {
-    id: 1,
-    subject: "Advanced Web Development",
-    time: "09:00 AM - 10:30 AM",
-    status: "completed",
-    students: 25,
-  },
-  {
-    id: 2,
-    subject: "React Fundamentals",
-    time: "11:00 AM - 12:30 PM",
-    status: "ongoing",
-    students: 30,
-  },
-  {
-    id: 3,
-    subject: "JavaScript Basics",
-    time: "02:00 PM - 03:30 PM",
-    status: "upcoming",
-    students: 28,
-  },
-];
-
-const studentPerformance = [
-  {
-    id: 1,
-    name: "John Doe",
-    avatar: "https://i.pravatar.cc/150?img=1",
-    course: "Advanced Web Development",
-    progress: 85,
-    grade: 92,
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    avatar: "https://i.pravatar.cc/150?img=2",
-    course: "React Fundamentals",
-    progress: 70,
-    grade: 78,
-  },
-  {
-    id: 3,
-    name: "Mike Johnson",
-    avatar: "https://i.pravatar.cc/150?img=3",
-    course: "JavaScript Basics",
-    progress: 60,
-    grade: 65,
-  },
-  {
-    id: 4,
-    name: "Sarah Williams",
-    avatar: "https://i.pravatar.cc/150?img=4",
-    course: "Advanced Web Development",
-    progress: 90,
-    grade: 95,
-  },
-];
+import { todayClasses, studentPerformance } from "../constants";
 
 export default function TeacherDashboard() {
   return (

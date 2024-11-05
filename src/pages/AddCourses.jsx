@@ -132,7 +132,7 @@ export default function AddCourse() {
                 onChange={(e) => onChange(Number(e.target.value))}
                 error={!!errors.price}
                 helperText={errors.price?.message}
-                InputProps={{
+                slotProps={{
                   startAdornment: (
                     <InputAdornment position="start">
                       <DollarSign size={20} />
@@ -156,7 +156,7 @@ export default function AddCourse() {
                 onChange={(e) => onChange(Number(e.target.value))}
                 error={!!errors.duration}
                 helperText={errors.duration?.message}
-                InputProps={{
+                slotProps={{
                   startAdornment: (
                     <InputAdornment position="start">
                       <Clock size={20} />
@@ -180,7 +180,7 @@ export default function AddCourse() {
                 onChange={(e) => onChange(Number(e.target.value))}
                 error={!!errors.capacity}
                 helperText={errors.capacity?.message}
-                InputProps={{
+                slotProps={{
                   startAdornment: (
                     <InputAdornment position="start">
                       <Users size={20} />
