@@ -9,6 +9,7 @@ import SignUp from "./pages/Signup";
 import AddCourses from "./pages/AddCourses";
 import CourseSelection from "./pages/CourseSelect";
 import Dashboard from "./pages/Dashboard";
+import TeacherDashboard from "./pages/TeacherDashboard";
 
 function App() {
   return (
@@ -21,8 +22,9 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<SignUp />} />
               <Route path="/addcourses" element={<AddCourses />} />
-              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/" element={<CourseSelection />} />
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/teacher-dashboard" element={<TeacherDashboard />} />
             </Routes>
           </Layout>
         </ThemeProvider>
