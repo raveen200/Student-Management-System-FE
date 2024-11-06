@@ -36,14 +36,7 @@ export const signUpSchema = object({
     .oneOf(["student", "teacher"], "Please select a valid role")
     .required("Please select a role"),
 
-  profilePicture: mixed()
-    .test("fileSize ", "File too large, 5MB Max", (value) => {
-      return value && value[0].size <= MAX_FILE_SIZE;
-    })
-    .test("fileType", "Unsupported file format", (value) => {
-      return value && ACCEPTED_IMAGE_TYPES.includes(value[0].type);
-    })
-    .optional(),
+ 
 });
 
 export const courseSchema = object({

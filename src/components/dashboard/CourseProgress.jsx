@@ -6,15 +6,16 @@ import {
   ListItemText,
   ListItemAvatar,
   Avatar,
-  LinearProgress,
   Paper,
+  Chip,
 } from "@mui/material";
+
 // eslint-disable-next-line react/prop-types
 export default function CourseProgress({ courses }) {
   return (
     <Paper sx={{ p: 3 }}>
       <Typography variant="h6" component="h2" gutterBottom>
-        Course Progress
+        Active Courses
       </Typography>
       <List>
         {courses.map((course) => (
@@ -25,7 +26,7 @@ export default function CourseProgress({ courses }) {
             <ListItemText
               primary={
                 <Typography component="div" variant="subtitle1">
-                  {course.title}
+                  {course?.course.title}
                 </Typography>
               }
               secondary={
@@ -36,24 +37,16 @@ export default function CourseProgress({ courses }) {
                     color="text.secondary"
                     gutterBottom
                   >
-                    Next: {course.nextLesson}
+                    {course?.course.description}
                   </Typography>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <LinearProgress
-                      variant="determinate"
-                      value={course.progress}
-                      sx={{ flexGrow: 1 }}
-                    />
-                    <Typography
-                      component="span"
-                      variant="body2"
-                      color="text.secondary"
-                    >
-                      {course.progress}%
-                    </Typography>
-                  </Box>
                 </Box>
               }
+            />
+            <Chip
+              label={course.status}
+              size="small"
+              sx={{ ml: "auto" }}
+              color={course.status === "active" ? "success" : "secondary"}
             />
           </ListItem>
         ))}

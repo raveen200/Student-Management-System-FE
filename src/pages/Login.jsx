@@ -16,8 +16,13 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import CustomTextField from "../components/ui/CustomTextField";
 import { useNavigate } from "react-router-dom";
+import { login } from "../services/index";
+import { toast } from "react-toastify";
+import { setLoginEmail_Role } from "../redux/Slice";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -39,10 +44,15 @@ export default function Login() {
 
   const onSubmit = async (data) => {
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Form submitted:", data);
+      const response = await login(data);
+      if (response.token) {
+        dispatch(setLoginEmail_Role(response));
+        toast.success("Login successful");
+
+        navigate("/dashboard");
+      }
     } catch (error) {
+      toast.error("Login failed");
       console.error("Login error:", error);
     }
   };

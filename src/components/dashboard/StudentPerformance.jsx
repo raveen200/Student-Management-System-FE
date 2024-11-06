@@ -9,7 +9,6 @@ import {
   TableRow,
   Avatar,
   Box,
-  LinearProgress,
 } from "@mui/material";
 // eslint-disable-next-line react/prop-types
 export default function StudentPerformance({ students }) {
@@ -24,45 +23,19 @@ export default function StudentPerformance({ students }) {
             <TableRow>
               <TableCell>Student</TableCell>
               <TableCell>Course</TableCell>
-              <TableCell>Progress</TableCell>
-              <TableCell align="right">Grade</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {students.map((student) => (
-              <TableRow key={student.id}>
+              <TableRow key={student?.id}>
                 <TableCell>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                    <Avatar src={student.avatar} />
-                    <Typography variant="body2">{student.name}</Typography>
+                    <Avatar src={student?.avatar} />
+                    <Typography variant="body2">{student?.name}</Typography>
                   </Box>
                 </TableCell>
-                <TableCell>{student.course}</TableCell>
-                <TableCell>
-                  <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                    <LinearProgress
-                      variant="determinate"
-                      value={student.progress}
-                      sx={{ flexGrow: 1 }}
-                    />
-                    <Typography variant="body2">{student.progress}%</Typography>
-                  </Box>
-                </TableCell>
-                <TableCell align="right">
-                  <Typography
-                    variant="body2"
-                    sx={{
-                      color:
-                        student.grade >= 80
-                          ? "success.main"
-                          : student.grade >= 70
-                          ? "warning.main"
-                          : "error.main",
-                    }}
-                  >
-                    {student.grade}%
-                  </Typography>
-                </TableCell>
+                <TableCell>{student?.course.title}</TableCell>
+                <TableCell></TableCell>
               </TableRow>
             ))}
           </TableBody>

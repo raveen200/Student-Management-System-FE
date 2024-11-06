@@ -3,27 +3,15 @@ import {
   Typography,
   List,
   ListItem,
-  Chip,
   Box,
   Avatar,
 } from "@mui/material";
 // eslint-disable-next-line react/prop-types
 export default function ClassSchedule({ classes }) {
-  const getStatusColor = (status) => {
-    switch (status) {
-      case "ongoing":
-        return "success";
-      case "upcoming":
-        return "warning";
-      default:
-        return "default";
-    }
-  };
-
   return (
     <Paper sx={{ p: 3, height: "100%" }}>
       <Typography variant="h6" gutterBottom>
-        Today&apos;s Schedule
+        Recent Courses
       </Typography>
       <List>
         {classes.map((classItem) => (
@@ -41,24 +29,19 @@ export default function ClassSchedule({ classes }) {
               <Box
                 sx={{ display: "flex", alignItems: "center", gap: 1, mb: 1 }}
               >
-                <Typography variant="subtitle1">{classItem.subject}</Typography>
-                <Chip
-                  size="small"
-                  label={classItem.status}
-                  color={getStatusColor(classItem.status)}
-                />
+                <Typography variant="subtitle1">{classItem?.title}</Typography>
               </Box>
               <Typography variant="body2" color="text.secondary">
-                {classItem.time}
+                {classItem?.description}
               </Typography>
               <Box
                 sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1 }}
               >
                 <Avatar sx={{ width: 24, height: 24 }}>
-                  {classItem.students}
+                  {classItem?.students}
                 </Avatar>
                 <Typography variant="caption">
-                  {classItem.students} Students
+                  {classItem?.enrolledStudents.length} Students
                 </Typography>
               </Box>
             </Box>

@@ -11,8 +11,14 @@ import {
 import { BookOpen, Clock, Users, DollarSign, Loader2 } from "lucide-react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomTextField from "../components/ui/CustomTextField";
+import { useDispatch } from "react-redux";
+import { addCourseAction } from "../redux/Actions";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 export default function AddCourse() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const {
     register,
     control,
@@ -32,10 +38,13 @@ export default function AddCourse() {
 
   const onSubmit = async (data) => {
     try {
-      // Simulate API call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-      console.log("Course data:", data);
+      const response = await dispatch(addCourseAction(data));
+      if (response.meta.requestStatus === "fulfilled") {
+        toast.success("Course added successfully");
+        navigate("/teacher-dashboard");
+      }
     } catch (error) {
+      toast.error("Error adding course");
       console.error("Error adding course:", error);
     }
   };

@@ -1,11 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Paper,
   Typography,
   InputAdornment,
-  Chip,
-  Rating,
   Button,
   Card,
   CardContent,
@@ -25,33 +23,34 @@ import {
 } from "lucide-react";
 import Grid from "@mui/material/Grid2";
 import CustomTextField from "../components/ui/CustomTextField";
-import { courses, categories, levels } from "../constants/index";
+import { getCoursesAction } from "../redux/Actions";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function CourseSelection() {
+  const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedLevel, setSelectedLevel] = useState("All");
   const [selectedCourses, setSelectedCourses] = useState([]);
+  console.log(selectedCourses)
+  const courses = useSelector((state) => state.mgt.courses);
 
-  const addCourse = (course) => {
-    if (
-      !selectedCourses.some((selectedCourse) => selectedCourse.id === course.id)
-    ) {
-      setSelectedCourses([...selectedCourses, course]);
-    } else {
-      console.log("Course already selected");
-    }
-  };
+  useEffect(() => {
+    const fetchCourses = async () => {
+      await dispatch(getCoursesAction());
+    };
+    fetchCourses();
+  }, [dispatch]);
+
+  
+
+
+
+  
 
   const filteredCourses = courses.filter((course) => {
     const matchesSearch =
       course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       course.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory =
-      selectedCategory === "All" || course.category === selectedCategory;
-    const matchesLevel =
-      selectedLevel === "All" || course.level === selectedLevel;
-    return matchesSearch && matchesCategory && matchesLevel;
+    return matchesSearch;
   });
 
   return (
@@ -67,7 +66,7 @@ export default function CourseSelection() {
 
       <Paper sx={{ p: 3, mb: 4 }}>
         <Grid container spacing={3}>
-          <Grid size xs={12} md={6}>
+          <Grid size={{ xs: 12, md: 6, lg: 6 }}>
             <CustomTextField
               label="Search courses"
               value={searchTerm}
@@ -78,34 +77,6 @@ export default function CourseSelection() {
                 </InputAdornment>
               }
             />
-          </Grid>
-          <Grid size xs={12} md={6}>
-            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-              {categories.map((category) => (
-                <Chip
-                  key={category}
-                  label={category}
-                  onClick={() => setSelectedCategory(category)}
-                  color={selectedCategory === category ? "primary" : "default"}
-                  variant={
-                    selectedCategory === category ? "filled" : "outlined"
-                  }
-                />
-              ))}
-            </Box>
-          </Grid>
-          <Grid size xs={12}>
-            <Box sx={{ display: "flex", gap: 1, flexWrap: "wrap" }}>
-              {levels.map((level) => (
-                <Chip
-                  key={level}
-                  label={level}
-                  onClick={() => setSelectedLevel(level)}
-                  color={selectedLevel === level ? "secondary" : "default"}
-                  variant={selectedLevel === level ? "filled" : "outlined"}
-                />
-              ))}
-            </Box>
           </Grid>
         </Grid>
       </Paper>
@@ -153,7 +124,7 @@ export default function CourseSelection() {
                       textShadow: "0 1px 2px rgba(0,0,0,0.6)",
                     }}
                   >
-                    {course.instructor}
+                    {course.teacher.email}
                   </Typography>
                 </Box>
               </Box>
@@ -164,19 +135,7 @@ export default function CourseSelection() {
                 <Typography variant="body2" color="text.secondary" paragraph>
                   {course.description}
                 </Typography>
-                <Box
-                  sx={{ display: "flex", alignItems: "center", gap: 2, mb: 2 }}
-                >
-                  <Rating
-                    value={course.rating}
-                    precision={0.1}
-                    readOnly
-                    size="small"
-                  />
-                  <Typography variant="body2" color="text.secondary">
-                    ({course.rating})
-                  </Typography>
-                </Box>
+
                 <Grid container spacing={2}>
                   <Grid size xs={6}>
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
@@ -190,7 +149,7 @@ export default function CourseSelection() {
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
                       <Users size={16} />
                       <Typography variant="body2">
-                        {course.enrolled}/{course.capacity}
+                        {course.enrolledStudents.length}/{course.capacity}
                       </Typography>
                     </Box>
                   </Grid>
@@ -200,7 +159,7 @@ export default function CourseSelection() {
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <DollarSign size={16} />
                   <Typography variant="h6" color="primary">
-                    ${course.price}
+                    {course.price}
                   </Typography>
                 </Box>
                 <Box>

@@ -11,13 +11,14 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import {  User, Upload, Loader2 } from "lucide-react";
+import { User, Upload, Loader2 } from "lucide-react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../schema/yupSchema";
 import CustomTextField from "../components/ui/CustomTextField";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import CustomRadio from "../components/ui/CustomRadio";
 import { useNavigate } from "react-router-dom";
+import { signup } from "../services/index";
 
 export default function SignUp() {
   const navigate = useNavigate();
@@ -43,7 +44,7 @@ export default function SignUp() {
 
   const onSubmit = async (data) => {
     try {
-      // Simulate API call
+      await signup(data);
       await new Promise((resolve) => setTimeout(resolve, 1500));
       console.log("Form submitted:", data);
     } catch (error) {

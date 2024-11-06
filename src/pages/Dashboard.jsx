@@ -1,19 +1,26 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { BookOpen, Clock, Calendar, Bell } from "lucide-react";
+import { BookOpen,  Calendar, Bell } from "lucide-react";
 import StatCard from "../components/dashboard/StatCard";
 import CourseProgress from "../components/dashboard/CourseProgress";
 import Achievements from "../components/dashboard/Achievements";
-import AssignmentList from "../components/dashboard/AssignmentList";
-import {
-  enrolledCourses,
-  upcomingAssignments,
-  achievements,
-} from "../constants/index";
 
+import { upcomingAssignments, achievements } from "../constants/index";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getEnrollmentsAction } from "../redux/Actions";
 export default function Dashboard() {
-  const [notifications] = useState(3);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+
+  const enrolledCourses = useSelector((state) => state.mgt.enrollments);
+  useEffect(() => {
+    const fetchEnrollments = async () => {
+      await dispatch(getEnrollmentsAction());
+    };
+    fetchEnrollments();
+  }, [dispatch]);
 
   return (
     <Box sx={{ py: 3 }}>
@@ -28,8 +35,13 @@ export default function Dashboard() {
         <Typography variant="h4" component="h1" gutterBottom>
           Student Dashboard
         </Typography>
-        <Button variant="outlined" startIcon={<Bell />} color="primary">
-          {notifications} New Notifications
+        <Button
+          variant="outlined"
+          startIcon={<Bell />}
+          color="primary"
+          onClick={() => navigate("/courseselection")}
+        >
+          Find New Courses
         </Button>
       </Box>
 
@@ -44,13 +56,6 @@ export default function Dashboard() {
 
         <Grid size={{ xs: 12, md: 4 }}>
           <StatCard
-            icon={<Clock size={32} color="#2563eb" />}
-            title="Total Hours"
-            value={45}
-          />
-        </Grid>
-        <Grid size={{ xs: 12, md: 4 }}>
-          <StatCard
             icon={<Calendar size={32} color="#2563eb" />}
             title="Assignments Due"
             value={upcomingAssignments.length}
@@ -63,10 +68,6 @@ export default function Dashboard() {
 
         <Grid size={{ xs: 12, md: 4 }}>
           <Achievements achievements={achievements} />
-        </Grid>
-
-        <Grid size={{ xs: 12 }}>
-          <AssignmentList assignments={upcomingAssignments} />
         </Grid>
       </Grid>
     </Box>
