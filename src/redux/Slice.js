@@ -16,6 +16,9 @@ const slice = createSlice({
     setLoginEmail_Role: (state, action) => {
       state.loginEmail_Role = action.payload;
     },
+    setCartCourses: (state, action) => {
+      state.cartCourses = action.payload;
+    },
   },
 
   extraReducers: (builder) => {
@@ -31,5 +34,6 @@ const slice = createSlice({
 });
 
 export const { setLoginEmail_Role } = slice.actions;
+export const { setCartCourses } = slice.actions;
 
 export default slice.reducer;

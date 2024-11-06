@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   AppBar,
   Toolbar,
@@ -7,15 +7,19 @@ import {
   Box,
   Menu,
   MenuItem,
+  Avatar,
 } from "@mui/material";
 import { User, ShoppingCart } from "lucide-react";
 import propsTypes from "prop-types";
 import Logo from "../assets/logo.png";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CartDrawer from "../components/ui/CustomCart";
-import { cartState as cartItems } from "../constants/index";
+import {  useSelector } from "react-redux";
+import Cookies from "js-cookie";
 
 export default function Navbar({ onMenuClick }) {
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
@@ -30,7 +34,16 @@ export default function Navbar({ onMenuClick }) {
     setAnchorEl(null);
   };
 
-  const itemCount = cartItems.items.length;
+  const handleLogout = () => {
+    handleClose();
+    Cookies.remove("token");
+    navigate("/login");
+  };
+
+  const itemCount = useSelector((state) => state.mgt.cartCourses);
+  const profileDetails = useSelector((state) => state.mgt.loginEmail_Role);
+  const DP = apiUrl + "/" + profileDetails.profilePicture;
+
 
   return (
     <>
@@ -58,15 +71,15 @@ export default function Navbar({ onMenuClick }) {
                 className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
               >
                 <ShoppingCart className="w-5 h-5" />
-                {itemCount > 0 && (
+                {itemCount?.length > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
-                    {itemCount}
+                    {itemCount?.length}
                   </span>
                 )}
               </button>
 
               <IconButton color="inherit" onClick={handleProfileClick}>
-                <User size={20} />
+                <Avatar src={DP} alt="Profile Picture" />
               </IconButton>
             </Box>
           )}
@@ -81,7 +94,7 @@ export default function Navbar({ onMenuClick }) {
             >
               <MenuItem onClick={handleClose}>Profile</MenuItem>
               <MenuItem onClick={handleClose}>Settings</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem onClick={handleLogout}>Logout</MenuItem>
             </Menu>
           )}
         </Toolbar>

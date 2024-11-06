@@ -5,16 +5,17 @@ import { BookOpen,  Calendar, Bell } from "lucide-react";
 import StatCard from "../components/dashboard/StatCard";
 import CourseProgress from "../components/dashboard/CourseProgress";
 import Achievements from "../components/dashboard/Achievements";
-
 import { upcomingAssignments, achievements } from "../constants/index";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getEnrollmentsAction } from "../redux/Actions";
+
 export default function Dashboard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const enrolledCourses = useSelector((state) => state.mgt.enrollments);
+  console.log("enrolledCourses",enrolledCourses);
   useEffect(() => {
     const fetchEnrollments = async () => {
       await dispatch(getEnrollmentsAction());

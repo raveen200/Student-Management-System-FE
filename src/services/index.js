@@ -58,7 +58,9 @@ export const getCoursesById = async (id) => {
 export const addEnrollment = async (data) => {
   // eslint-disable-next-line no-useless-catch
   try {
-    const response = await api.post(API_CONSTANTS.ENROLLMENTS, data);
+    const response = await api.post(API_CONSTANTS.ENROLLMENTS, {
+      courseId: data
+    });
     return response.data;
   } catch (error) {
     throw error;

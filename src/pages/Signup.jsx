@@ -18,10 +18,14 @@ import CustomTextField from "../components/ui/CustomTextField";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import CustomRadio from "../components/ui/CustomRadio";
 import { useNavigate } from "react-router-dom";
-import { signup } from "../services/index";
+import { signup } from "../services/Index";
+import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setLoginEmail_Role } from "../redux/Slice";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [previewUrl, setPreviewUrl] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState(null);
@@ -43,12 +47,28 @@ export default function SignUp() {
   });
 
   const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("email", data.email);
+    formData.append("password", data.password);
+    formData.append("role", role);
+    formData.append("profilePicture", data.profilePicture[0]);
+
     try {
-      await signup(data);
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-      console.log("Form submitted:", data);
+      const response = await signup(formData);
+      console.log(response);
+      if (response._id) {
+        {
+          role === "student"
+            ? navigate("/dashboard")
+            : navigate("/teacher-dashboard");
+        }
+        dispatch(setLoginEmail_Role(response));
+        toast.success("Account created successfully");
+      }
     } catch (error) {
-      console.error("SignUp error:", error);
+      console.log(error);
+      toast.error("Account creation failed");
     }
   };
 

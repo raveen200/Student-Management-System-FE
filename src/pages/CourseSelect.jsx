@@ -23,15 +23,25 @@ import {
 } from "lucide-react";
 import Grid from "@mui/material/Grid2";
 import CustomTextField from "../components/ui/CustomTextField";
-import { getCoursesAction } from "../redux/Actions";
+import { getCoursesAction, getEnrollmentsAction } from "../redux/Actions";
 import { useDispatch, useSelector } from "react-redux";
+import { setCartCourses } from "../redux/Slice";
 
 export default function CourseSelection() {
   const dispatch = useDispatch();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCourses, setSelectedCourses] = useState([]);
-  console.log(selectedCourses)
   const courses = useSelector((state) => state.mgt.courses);
+
+  const enrolledCourses = useSelector((state) => state.mgt.enrollments);
+  console.log("enrolledCourses", enrolledCourses);
+
+  useEffect(() => {
+    const fetchEnrollments = async () => {
+      await dispatch(getEnrollmentsAction());
+    };
+    fetchEnrollments();
+  }, [dispatch]);
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -40,18 +50,33 @@ export default function CourseSelection() {
     fetchCourses();
   }, [dispatch]);
 
-  
+  useEffect(() => {
+    dispatch(setCartCourses(selectedCourses));
+  }, [selectedCourses, dispatch]);
 
-
-
-  
-
+  const addCourse = (course) => {
+    const uniqueCourses = selectedCourses.filter(
+      (selectedCourse) => selectedCourse._id !== course._id
+    );
+    setSelectedCourses([...uniqueCourses, course]);
+  };
   const filteredCourses = courses.filter((course) => {
     const matchesSearch =
       course.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       course.description.toLowerCase().includes(searchTerm.toLowerCase());
     return matchesSearch;
   });
+
+  const isCourseSelected = (course) => {
+    return (
+      selectedCourses.some(
+        (selectedCourse) => selectedCourse._id === course._id
+      ) ||
+      enrolledCourses.some(
+        (enrolledCourse) => enrolledCourse.course._id === course._id
+      )
+    );
+  };
 
   return (
     <Box sx={{ py: 3 }}>
@@ -83,7 +108,7 @@ export default function CourseSelection() {
 
       <Grid container spacing={2}>
         {filteredCourses.map((course) => (
-          <Grid size={{ xs: 12, md: 6, lg: 4 }} key={course.id}>
+          <Grid size={{ xs: 12, md: 6, lg: 4 }} key={course._id}>
             <Card
               sx={{
                 height: "100%",
@@ -178,6 +203,7 @@ export default function CourseSelection() {
                     startIcon={<BookOpen size={16} />}
                     size="small"
                     onClick={() => addCourse(course)}
+                    disabled={isCourseSelected(course)}
                   >
                     Enroll Now
                   </Button>

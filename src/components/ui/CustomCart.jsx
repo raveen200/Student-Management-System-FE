@@ -12,12 +12,43 @@ import {
   Divider,
 } from "@mui/material";
 import { X, Trash2 } from "lucide-react";
-import { cartState as state } from "../../constants/index";
+import { setCartCourses } from "../../redux/Slice";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { addEnrollmentAction,  } from "../../redux/Actions";
+
+import { toast } from "react-toastify";
 // eslint-disable-next-line react/prop-types
 export default function CartDrawer({ open, onClose }) {
-  const handleRemoveItem = (id) => {
-    // Remove item from cart
-    console.log("Removing item with id: ", id);
+  const cartData = useSelector((state) => state.mgt.cartCourses);
+  const [total, setTotal] = useState(null);
+  const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    setTotal(cartData?.reduce((sum, item) => sum + item.price, 0));
+  }, [cartData]);
+
+ ;
+
+  const handleRemoveItem = (_id) => {
+    const updatedCartData = cartData.filter((item) => item._id !== _id);
+    dispatch(setCartCourses(updatedCartData));
+  };
+
+  const handleBuy = async () => {
+    const courseIds = cartData.map((item) => item._id);
+    try {
+      const response = await dispatch(addEnrollmentAction(courseIds)).unwrap();
+      if (response) {
+        toast.success("Enrollment successful");
+      }
+
+      dispatch(setCartCourses([]));
+    } catch (error) {
+      console.error("Add enrollment error:", error);
+      toast.error("Enrollment failed");
+    }
   };
 
   return (
@@ -45,7 +76,7 @@ export default function CartDrawer({ open, onClose }) {
           </IconButton>
         </Box>
 
-        {state.items.length === 0 ? (
+        {cartData?.length === 0 ? (
           <Box
             sx={{
               flex: 1,
@@ -65,9 +96,9 @@ export default function CartDrawer({ open, onClose }) {
         ) : (
           <>
             <List sx={{ flex: 1, overflow: "auto" }}>
-              {state.items.map((item) => (
+              {cartData?.map((item) => (
                 <ListItem
-                  key={item.id}
+                  key={item._id}
                   alignItems="flex-start"
                   secondaryAction={
                     <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
@@ -77,7 +108,7 @@ export default function CartDrawer({ open, onClose }) {
                       <IconButton
                         edge="end"
                         size="small"
-                        onClick={() => handleRemoveItem(item.id)}
+                        onClick={() => handleRemoveItem(item._id)}
                       >
                         <Trash2 size={16} />
                       </IconButton>
@@ -107,17 +138,14 @@ export default function CartDrawer({ open, onClose }) {
               >
                 <Typography variant="subtitle1">Total:</Typography>
                 <Typography variant="h6" color="primary">
-                  ${state.total}
+                  ${total}
                 </Typography>
               </Box>
               <Button
                 variant="contained"
                 fullWidth
                 size="large"
-                onClick={() => {
-                  // Handle checkout
-                  console.log("Proceeding to checkout");
-                }}
+                onClick={handleBuy}
               >
                 Proceed to Checkout
               </Button>

@@ -60,9 +60,8 @@ const reducer = {
       state.isLoading = true;
     });
 
-    builder.addCase(addEnrollmentAction.fulfilled, (state, action) => {
+    builder.addCase(addEnrollmentAction.fulfilled, (state,) => {
       state.isLoading = false;
-      state.enrollments.push(action.payload);
     });
 
     builder.addCase(addEnrollmentAction.rejected, (state) => {
