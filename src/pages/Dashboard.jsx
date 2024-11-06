@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { Box, Typography, Button } from "@mui/material";
 import Grid from "@mui/material/Grid2";
-import { BookOpen,  Calendar, Bell } from "lucide-react";
+import ClassIcon from "@mui/icons-material/Class";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import StatCard from "../components/dashboard/StatCard";
 import CourseProgress from "../components/dashboard/CourseProgress";
-import Achievements from "../components/dashboard/Achievements";
-import { upcomingAssignments, achievements } from "../constants/index";
+import { upcomingAssignments } from "../constants/index";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getEnrollmentsAction } from "../redux/Actions";
@@ -15,7 +16,6 @@ export default function Dashboard() {
   const dispatch = useDispatch();
 
   const enrolledCourses = useSelector((state) => state.mgt.enrollments);
-  console.log("enrolledCourses",enrolledCourses);
   useEffect(() => {
     const fetchEnrollments = async () => {
       await dispatch(getEnrollmentsAction());
@@ -38,7 +38,7 @@ export default function Dashboard() {
         </Typography>
         <Button
           variant="outlined"
-          startIcon={<Bell />}
+          startIcon={<AddCircleOutlineIcon />}
           color="primary"
           onClick={() => navigate("/courseselection")}
         >
@@ -49,7 +49,7 @@ export default function Dashboard() {
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, md: 4 }}>
           <StatCard
-            icon={<BookOpen size={32} color="#2563eb" />}
+            icon={<ClassIcon size={32} color="primary" />}
             title="Enrolled Courses"
             value={enrolledCourses.length}
           />
@@ -57,18 +57,14 @@ export default function Dashboard() {
 
         <Grid size={{ xs: 12, md: 4 }}>
           <StatCard
-            icon={<Calendar size={32} color="#2563eb" />}
+            icon={<CalendarMonthIcon size={32} color="primary" />}
             title="Assignments Due"
             value={upcomingAssignments.length}
           />
         </Grid>
 
-        <Grid size={{ xs: 12, md: 8 }}>
+        <Grid size={{ xs: 12, md: 12 }}>
           <CourseProgress courses={enrolledCourses} />
-        </Grid>
-
-        <Grid size={{ xs: 12, md: 4 }}>
-          <Achievements achievements={achievements} />
         </Grid>
       </Grid>
     </Box>

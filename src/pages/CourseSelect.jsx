@@ -12,15 +12,13 @@ import {
   IconButton,
   Tooltip,
 } from "@mui/material";
-import {
-  Search,
-  BookOpen,
-  Clock,
-  Users,
-  DollarSign,
-  Bookmark,
-  Share2,
-} from "lucide-react";
+import SearchIcon from "@mui/icons-material/Search";
+import ClassIcon from "@mui/icons-material/Class";
+import AvTimerIcon from "@mui/icons-material/AvTimer";
+import GroupIcon from "@mui/icons-material/Group";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import BookmarkIcon from "@mui/icons-material/Bookmark";
+import IosShareIcon from "@mui/icons-material/IosShare";
 import Grid from "@mui/material/Grid2";
 import CustomTextField from "../components/ui/CustomTextField";
 import { getCoursesAction, getEnrollmentsAction } from "../redux/Actions";
@@ -98,7 +96,7 @@ export default function CourseSelection() {
               onChange={(e) => setSearchTerm(e.target.value)}
               startAdornment={
                 <InputAdornment position="start">
-                  <Search size={20} />
+                  <SearchIcon size={20} />
                 </InputAdornment>
               }
             />
@@ -164,7 +162,7 @@ export default function CourseSelection() {
                 <Grid container spacing={2}>
                   <Grid size xs={6}>
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      <Clock size={16} />
+                      <AvTimerIcon size={16} />
                       <Typography variant="body2">
                         {course.duration} weeks
                       </Typography>
@@ -172,7 +170,7 @@ export default function CourseSelection() {
                   </Grid>
                   <Grid size xs={6}>
                     <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-                      <Users size={16} />
+                      <GroupIcon size={16} />
                       <Typography variant="body2">
                         {course.enrolledStudents.length}/{course.capacity}
                       </Typography>
@@ -182,7 +180,7 @@ export default function CourseSelection() {
               </CardContent>
               <CardActions sx={{ justifyContent: "space-between", p: 2 }}>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
-                  <DollarSign size={16} />
+                  <AttachMoneyIcon size={16} />
                   <Typography variant="h6" color="primary">
                     {course.price}
                   </Typography>
@@ -190,17 +188,17 @@ export default function CourseSelection() {
                 <Box>
                   <Tooltip title="Save for later">
                     <IconButton size="small" sx={{ mr: 1 }}>
-                      <Bookmark size={16} />
+                      <BookmarkIcon size={16} />
                     </IconButton>
                   </Tooltip>
                   <Tooltip title="Share">
                     <IconButton size="small" sx={{ mr: 1 }}>
-                      <Share2 size={16} />
+                      <IosShareIcon size={16} />
                     </IconButton>
                   </Tooltip>
                   <Button
                     variant="contained"
-                    startIcon={<BookOpen size={16} />}
+                    startIcon={<ClassIcon size={16} />}
                     size="small"
                     onClick={() => addCourse(course)}
                     disabled={isCourseSelected(course)}

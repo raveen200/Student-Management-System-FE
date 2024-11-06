@@ -45,11 +45,15 @@ export default function Login() {
   const onSubmit = async (data) => {
     try {
       const response = await login(data);
-      if (response.token) {
+      if (response.role) {
         dispatch(setLoginEmail_Role(response));
         toast.success("Login successful");
 
-        navigate("/dashboard");
+        if (response.role === "teacher") {
+          navigate("/teacher-dashboard");
+        } else {
+          navigate("/dashboard");
+        }
       }
     } catch (error) {
       toast.error("Login failed");

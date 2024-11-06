@@ -9,20 +9,35 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-
 import propsTypes from "prop-types";
 import { useLocation, useNavigate } from "react-router-dom";
-import { menuItems } from "../constants";
+import { teacherMenuItems, studentMenuItems } from "../utils/data";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setLoginEmail_Role } from "../redux/Slice";
 
 const drawerWidth = 240;
 
 export default function Sidebar({ open, onClose }) {
+  const dispatch = useDispatch();
   const theme = useTheme();
   const navigate = useNavigate();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
   const location = useLocation();
   const isLoginPage = location.pathname === "/login";
   const isSignupPage = location.pathname === "/signup";
+
+  useEffect(() => {
+    dispatch(setLoginEmail_Role);
+  }),
+    [dispatch];
+
+  const loginEmail_Role = useSelector((state) => state.mgt.loginEmail_Role);
+
+  const menuItems =
+    loginEmail_Role?.role === "teacher" ? teacherMenuItems : studentMenuItems;
+
+  // const menuItems = teacherMenuItems;
 
   const drawerContent = (
     <Box sx={{ overflow: "auto", mt: 8 }}>

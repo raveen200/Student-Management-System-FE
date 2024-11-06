@@ -11,11 +11,12 @@ import {
   Button,
   Divider,
 } from "@mui/material";
-import { X, Trash2 } from "lucide-react";
+import DeleteIcon from "@mui/icons-material/Delete";
+import PriorityHighIcon from "@mui/icons-material/PriorityHigh";
 import { setCartCourses } from "../../redux/Slice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { addEnrollmentAction,  } from "../../redux/Actions";
+import { addEnrollmentAction } from "../../redux/Actions";
 
 import { toast } from "react-toastify";
 // eslint-disable-next-line react/prop-types
@@ -24,12 +25,9 @@ export default function CartDrawer({ open, onClose }) {
   const [total, setTotal] = useState(null);
   const dispatch = useDispatch();
 
-
   useEffect(() => {
     setTotal(cartData?.reduce((sum, item) => sum + item.price, 0));
   }, [cartData]);
-
- ;
 
   const handleRemoveItem = (_id) => {
     const updatedCartData = cartData.filter((item) => item._id !== _id);
@@ -72,7 +70,7 @@ export default function CartDrawer({ open, onClose }) {
         >
           <Typography variant="h6">Shopping Cart</Typography>
           <IconButton onClick={onClose} size="small">
-            <X size={20} />
+            <PriorityHighIcon size={20} />
           </IconButton>
         </Box>
 
@@ -110,7 +108,7 @@ export default function CartDrawer({ open, onClose }) {
                         size="small"
                         onClick={() => handleRemoveItem(item._id)}
                       >
-                        <Trash2 size={16} />
+                        <DeleteIcon size={16} />
                       </IconButton>
                     </Box>
                   }

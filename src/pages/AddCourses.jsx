@@ -8,7 +8,12 @@ import {
   Button,
   InputAdornment,
 } from "@mui/material";
-import { BookOpen, Clock, Users, DollarSign, Loader2 } from "lucide-react";
+
+import ClassIcon from "@mui/icons-material/Class";
+import AvTimerIcon from "@mui/icons-material/AvTimer";
+import GroupIcon from "@mui/icons-material/Group";
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { yupResolver } from "@hookform/resolvers/yup";
 import CustomTextField from "../components/ui/CustomTextField";
 import { useDispatch } from "react-redux";
@@ -86,7 +91,7 @@ export default function AddCourse() {
             helperText={errors.title?.message}
             startAdornment={
               <InputAdornment position="start">
-                <BookOpen size={20} />
+                <ClassIcon size={20} />
               </InputAdornment>
             }
           />
@@ -101,32 +106,7 @@ export default function AddCourse() {
             rows={4}
           />
 
-          {/* <CustomTextField
-            label="Price"
-            type="number"
-            error={!!errors.price}
-            helperText={errors.price?.message}
-            {...register("price")}
-            startAdornment={
-              <InputAdornment position="start">
-                <DollarSign size={20} />
-              </InputAdornment>
-            }
-            /> */}
-          {/* 
-          <CustomValueChangeTextField
-            title="Price"
-            name="price"
-            control={control}
-            error={!!errors.price}
-            helperText={errors.price?.message}
-            errormessage={errors.price?.message}
-            onChange={(e) => onChange(Number(e.target.value))}
-            register={register("price")}
-
-
-
-          /> */}
+       
 
           <Controller
             name="price"
@@ -144,7 +124,7 @@ export default function AddCourse() {
                 slotProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <DollarSign size={20} />
+                      <AttachMoneyIcon size={20} />
                     </InputAdornment>
                   ),
                 }}
@@ -168,7 +148,7 @@ export default function AddCourse() {
                 slotProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Clock size={20} />
+                      <AvTimerIcon size={20} />
                     </InputAdornment>
                   ),
                 }}
@@ -192,7 +172,7 @@ export default function AddCourse() {
                 slotProps={{
                   startAdornment: (
                     <InputAdornment position="start">
-                      <Users size={20} />
+                      <GroupIcon size={20} />
                     </InputAdornment>
                   ),
                 }}
@@ -207,7 +187,7 @@ export default function AddCourse() {
             variant="contained"
             disabled={isSubmitting}
             startIcon={
-              isSubmitting ? <Loader2 className="animate-spin" /> : null
+              isSubmitting ? <AutorenewIcon className="animate-spin" /> : null
             }
             sx={{
               mt: 3,

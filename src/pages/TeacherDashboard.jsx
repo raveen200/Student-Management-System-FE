@@ -1,5 +1,7 @@
 import { Box, Typography, Button } from "@mui/material";
-import { Users, GraduationCap, BookOpen, Clock } from "lucide-react";
+
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import PersonIcon from '@mui/icons-material/Person';
 import Grid from "@mui/material/Grid2";
 import TeacherStatCard from "../components/dashboard/TeacherStatCard";
 import ClassSchedule from "../components/dashboard/ClassSchedule";
@@ -70,14 +72,14 @@ export default function TeacherDashboard() {
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, sm: 6, md: 6 }}>
           <TeacherStatCard
-            icon={<Users size={24} color="#2563eb" />}
+            icon={<PersonIcon size={24}  />}
             title="Total Students"
             value={enrolledStudentsCount}
           />
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 6 }}>
           <TeacherStatCard
-            icon={<BookOpen size={24} color="#2563eb" />}
+            icon={<MenuBookIcon size={24}  />}
             title="Active Courses"
             value={coursesCount}
           />

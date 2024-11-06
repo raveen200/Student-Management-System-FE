@@ -9,12 +9,12 @@ import {
   MenuItem,
   Avatar,
 } from "@mui/material";
-import { User, ShoppingCart } from "lucide-react";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import propsTypes from "prop-types";
 import Logo from "../assets/logo.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import CartDrawer from "../components/ui/CustomCart";
-import {  useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import Cookies from "js-cookie";
 
 export default function Navbar({ onMenuClick }) {
@@ -44,7 +44,6 @@ export default function Navbar({ onMenuClick }) {
   const profileDetails = useSelector((state) => state.mgt.loginEmail_Role);
   const DP = apiUrl + "/" + profileDetails.profilePicture;
 
-
   return (
     <>
       <AppBar
@@ -70,7 +69,7 @@ export default function Navbar({ onMenuClick }) {
                 onClick={() => setCartOpen(true)}
                 className="relative p-2 hover:bg-gray-100 rounded-full transition-colors"
               >
-                <ShoppingCart className="w-5 h-5" />
+                <ShoppingCartIcon className="w-5 h-5" />
                 {itemCount?.length > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                     {itemCount?.length}

@@ -11,7 +11,9 @@ import {
   InputAdornment,
   IconButton,
 } from "@mui/material";
-import { User, Upload, Loader2 } from "lucide-react";
+import PersonIcon from "@mui/icons-material/Person";
+import UploadIcon from "@mui/icons-material/Upload";
+import AutorenewIcon from "@mui/icons-material/Autorenew";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { signUpSchema } from "../schema/yupSchema";
 import CustomTextField from "../components/ui/CustomTextField";
@@ -125,13 +127,13 @@ export default function SignUp() {
                   bgcolor: "primary.main",
                 }}
               >
-                {!previewUrl && <User size={40} />}
+                {!previewUrl && <PersonIcon size={40} />}
               </Avatar>
               <Button
                 component="label"
                 variant="outlined"
                 size="small"
-                startIcon={<Upload size={16} />}
+                startIcon={<UploadIcon size={16} />}
                 sx={{
                   position: "absolute",
                   bottom: 0,
@@ -216,7 +218,7 @@ export default function SignUp() {
             variant="contained"
             disabled={isSubmitting}
             startIcon={
-              isSubmitting ? <Loader2 className="animate-spin" /> : null
+              isSubmitting ? <AutorenewIcon className="animate-spin" /> : null
             }
             sx={{
               mt: 3,
