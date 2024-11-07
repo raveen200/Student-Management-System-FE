@@ -14,7 +14,6 @@ import { getEnrollmentsAction } from "../redux/Actions";
 export default function Dashboard() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const enrolledCourses = useSelector((state) => state.mgt.enrollments);
   useEffect(() => {
     const fetchEnrollments = async () => {

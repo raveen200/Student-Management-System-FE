@@ -14,7 +14,7 @@ export const teacherMenuItems = [
 export const studentMenuItems = [
   { text: "Dashboard", icon: <HomeIcon size={20} />, path: "/dashboard" },
   {
-    text: "Students",
+    text: "Courses",
     icon: <GridViewIcon size={20} />,
     path: "/courseselection",
   },

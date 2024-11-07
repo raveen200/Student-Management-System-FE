@@ -10,6 +10,7 @@ import AddCourses from "./pages/AddCourses";
 import CourseSelection from "./pages/CourseSelect";
 import Dashboard from "./pages/Dashboard";
 import TeacherDashboard from "./pages/TeacherDashboard";
+import HomeworkUpload from "./pages/AddHomeWork";
 import ProtectedRoute from "./utils/ProtectedRoute";
 
 function App() {
@@ -30,7 +31,9 @@ function App() {
                   path="/teacher-dashboard"
                   element={<TeacherDashboard />}
                 />
+                <Route path="*" element={<Login />} />
               </Route>
+              <Route path="/homework/:id" element={<HomeworkUpload />} />
             </Routes>
           </Layout>
         </ThemeProvider>

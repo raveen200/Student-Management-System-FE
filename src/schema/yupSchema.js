@@ -78,3 +78,22 @@ export const courseSchema = object({
     .min(1, "Capacity must be at least 1 student")
     .max(1000, "Capacity cannot exceed 1000 students"),
 });
+
+const ACCEPTED_FILE_TYPES = ["application/pdf", "application/msword"];
+
+export const homeWorkSchema = object({
+  file: mixed()
+    .test(
+      "fileSize",
+      "File size must be less than 5MB",
+      (file) => file && file.size <= MAX_FILE_SIZE
+    )
+    .test(
+      "fileType",
+      "Only PDF and Word documents are allowed",
+      (file) => file && ACCEPTED_FILE_TYPES.includes(file.type)
+    ),
+  description: string()
+    .min(10, "Description must be at least 10 characters")
+    .max(500, "Description must not exceed 500 characters"),
+});

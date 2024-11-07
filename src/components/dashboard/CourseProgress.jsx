@@ -8,10 +8,14 @@ import {
   Avatar,
   Paper,
   Chip,
+  Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 // eslint-disable-next-line react/prop-types
 export default function CourseProgress({ courses }) {
+  const navigate = useNavigate();
+
   return (
     <Paper sx={{ p: 3 }}>
       <Typography variant="h6" component="h2" gutterBottom>
@@ -19,7 +23,7 @@ export default function CourseProgress({ courses }) {
       </Typography>
       <List>
         {courses.map((course) => (
-          <ListItem key={course.id} alignItems="flex-start" sx={{ px: 0 }}>
+          <ListItem key={course._id} alignItems="flex-start" sx={{ px: 0 }}>
             <ListItemAvatar>
               <Avatar src={course.image} variant="rounded" />
             </ListItemAvatar>
@@ -42,6 +46,16 @@ export default function CourseProgress({ courses }) {
                 </Box>
               }
             />
+            <Button
+              onClick={() => navigate(`/homework/${course?.course._id}`)}
+              disabled={!course.status === "active"}
+              variant="contained"
+              color="primary"
+              sx={{ mr: 2 }}
+            >
+              View Course
+            </Button>
+
             <Chip
               label={course.status}
               size="small"
