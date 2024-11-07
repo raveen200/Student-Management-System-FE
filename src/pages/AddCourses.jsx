@@ -7,6 +7,7 @@ import {
   TextField,
   Button,
   InputAdornment,
+  Avatar,
 } from "@mui/material";
 
 import ClassIcon from "@mui/icons-material/Class";
@@ -20,10 +21,14 @@ import { useDispatch } from "react-redux";
 import { addCourseAction } from "../redux/Actions";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import { PersonStandingIcon, UploadIcon } from "lucide-react";
+import { useState } from "react";
+import CheckIcon from "@mui/icons-material/Check";
 
 export default function AddCourse() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [previewUrl, setPreviewUrl] = useState(null);
   const {
     register,
     control,
@@ -42,8 +47,16 @@ export default function AddCourse() {
   });
 
   const onSubmit = async (data) => {
+    const formData = new FormData();
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("price", data.price);
+    formData.append("duration", data.duration);
+    formData.append("capacity", data.capacity);
+    formData.append("coverPicture", data.coverPicture[0]);
+
     try {
-      const response = await dispatch(addCourseAction(data));
+      const response = await dispatch(addCourseAction(formData));
       if (response.meta.requestStatus === "fulfilled") {
         toast.success("Course added successfully");
         navigate("/teacher-dashboard");
@@ -51,6 +64,17 @@ export default function AddCourse() {
     } catch (error) {
       toast.error("Error adding course");
       console.error("Error adding course:", error);
+    }
+  };
+
+  const handleImageChange = (event) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreviewUrl(reader.result);
+      };
+      reader.readAsDataURL(file);
     }
   };
 
@@ -106,7 +130,32 @@ export default function AddCourse() {
             rows={4}
           />
 
-       
+          <Button
+            component="label"
+            variant="outlined"
+            size="medium"
+            startIcon={!previewUrl ? <UploadIcon size={16} /> : null}
+            endIcon={previewUrl ? <CheckIcon size={16} /> : null}
+            sx={{
+              bottom: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
+              whiteSpace: "nowrap",
+              mt: 2,
+            }}
+          >
+            Upload Cover
+            <input
+              type="file"
+              hidden
+              accept="image/*"
+              {...register("coverPicture")}
+              onChange={(e) => {
+                register("profilePicture").onChange(e);
+                handleImageChange(e);
+              }}
+            />
+          </Button>
 
           <Controller
             name="price"

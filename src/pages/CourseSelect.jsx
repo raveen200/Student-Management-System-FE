@@ -30,9 +30,9 @@ export default function CourseSelection() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCourses, setSelectedCourses] = useState([]);
   const courses = useSelector((state) => state.mgt.courses);
+  const apiUrl = import.meta.env.VITE_APP_API_URL;
 
   const enrolledCourses = useSelector((state) => state.mgt.enrollments);
-  console.log("enrolledCourses", enrolledCourses);
 
   useEffect(() => {
     const fetchEnrollments = async () => {
@@ -123,7 +123,10 @@ export default function CourseSelection() {
               <Box
                 sx={{
                   height: 200,
-                  backgroundImage: `url(${course.image})`,
+                  backgroundImage: `url(${apiUrl}/${course.coverPicture.replace(
+                    /\\/g,
+                    "/"
+                  )})`,
                   backgroundSize: "cover",
                   backgroundPosition: "center",
                   position: "relative",
@@ -139,7 +142,9 @@ export default function CourseSelection() {
                     gap: 1,
                   }}
                 >
-                  <Avatar src={course.image} />
+                  <Avatar
+                    src={`${apiUrl}/${course.coverPicture.replace(/\\/g, "/")}`}
+                  />
                   <Typography
                     variant="subtitle2"
                     sx={{

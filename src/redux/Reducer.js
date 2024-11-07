@@ -106,9 +106,9 @@ const reducer = {
       state.isLoading = true;
     });
 
-    builder.addCase(addHomeworkAction.fulfilled, (state, action) => {
+    builder.addCase(addHomeworkAction.fulfilled, (state) => {
       state.isLoading = false;
-      state.homeworks.push(action.payload);
+    
     });
 
     builder.addCase(addHomeworkAction.rejected, (state) => {
