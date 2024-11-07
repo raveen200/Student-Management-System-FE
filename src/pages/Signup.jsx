@@ -58,7 +58,6 @@ export default function SignUp() {
 
     try {
       const response = await signup(formData);
-      console.log(response);
       if (response._id) {
         {
           role === "student"
