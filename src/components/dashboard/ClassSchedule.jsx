@@ -5,9 +5,34 @@ import {
   ListItem,
   Box,
   Avatar,
+  Button,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import CourseAssignments from "./CourseAssignments";
+import { useState } from "react";
 // eslint-disable-next-line react/prop-types
 export default function ClassSchedule({ classes }) {
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
+  const handleCourseClick = (courseId) => {
+    setSelectedCourse(courseId);
+  };
+
+  const handleClose = () => {
+    setSelectedCourse(null);
+  };
+
+  if (selectedCourse) {
+    const course = classes.find((c) => c.id === selectedCourse);
+    return (
+      <CourseAssignments
+        courseId={selectedCourse}
+        courseName={course?.name || ""}
+        onClose={handleClose}
+      />
+    );
+  }
+
   return (
     <Paper sx={{ p: 3, height: "100%" }}>
       <Typography variant="h6" gutterBottom>
@@ -16,7 +41,7 @@ export default function ClassSchedule({ classes }) {
       <List>
         {classes.map((classItem) => (
           <ListItem
-            key={classItem.id}
+            key={classItem._id}
             sx={{
               border: 1,
               borderColor: "divider",
@@ -43,6 +68,14 @@ export default function ClassSchedule({ classes }) {
                 <Typography variant="caption">
                   {classItem?.enrolledStudents.length} Students
                 </Typography>
+              </Box>
+              <Box
+                sx={{ display: "flex", alignItems: "center", gap: 1, mt: 1 }}
+                onClick={() => handleCourseClick(classItem._id)}
+              >
+                <Button variant="contained" color="primary" sx={{ mr: 2 }}>
+                  View Assignments
+                </Button>
               </Box>
             </Box>
           </ListItem>

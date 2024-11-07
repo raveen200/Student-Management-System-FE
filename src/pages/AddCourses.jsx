@@ -21,7 +21,7 @@ import { useDispatch } from "react-redux";
 import { addCourseAction } from "../redux/Actions";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import { PersonStandingIcon, UploadIcon } from "lucide-react";
+import {  UploadIcon } from "lucide-react";
 import { useState } from "react";
 import CheckIcon from "@mui/icons-material/Check";
 
@@ -127,7 +127,7 @@ export default function AddCourse() {
             error={!!errors.description}
             helperText={errors.description?.message}
             multiline
-            rows={4}
+            rows={2}
           />
 
           <Button

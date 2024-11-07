@@ -1,6 +1,6 @@
 import { Box, Typography, Button } from "@mui/material";
-import MenuBookIcon from '@mui/icons-material/MenuBook';
-import PersonIcon from '@mui/icons-material/Person';
+import MenuBookIcon from "@mui/icons-material/MenuBook";
+import PersonIcon from "@mui/icons-material/Person";
 import Grid from "@mui/material/Grid2";
 import TeacherStatCard from "../components/dashboard/TeacherStatCard";
 import ClassSchedule from "../components/dashboard/ClassSchedule";
@@ -40,6 +40,8 @@ export default function TeacherDashboard() {
       }))
     );
 
+
+
   useEffect(() => {
     const fetchCourses = async () => {
       await dispatch(getCoursesAction());
@@ -71,14 +73,14 @@ export default function TeacherDashboard() {
       <Grid container spacing={3}>
         <Grid size={{ xs: 12, sm: 6, md: 6 }}>
           <TeacherStatCard
-            icon={<PersonIcon size={24}  />}
+            icon={<PersonIcon size={24} />}
             title="Total Students"
             value={enrolledStudentsCount}
           />
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 6 }}>
           <TeacherStatCard
-            icon={<MenuBookIcon size={24}  />}
+            icon={<MenuBookIcon size={24} />}
             title="Active Courses"
             value={coursesCount}
           />

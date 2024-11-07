@@ -27,7 +27,7 @@ export default function StudentPerformance({ students }) {
           </TableHead>
           <TableBody>
             {students.map((student) => (
-              <TableRow key={student?.id}>
+              <TableRow key={student?._id}>
                 <TableCell>
                   <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
                     <Avatar src={student?.avatar} />

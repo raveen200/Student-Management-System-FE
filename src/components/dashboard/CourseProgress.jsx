@@ -53,7 +53,7 @@ export default function CourseProgress({ courses }) {
               color="primary"
               sx={{ mr: 2 }}
             >
-              View Course
+              Add Home Work
             </Button>
 
             <Chip
