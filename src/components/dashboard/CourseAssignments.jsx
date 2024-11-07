@@ -64,9 +64,9 @@ export default function CourseAssignments({ courseId, courseName, onClose }) {
 
       {assignments.length > 0 ? (
         <List>
-          {assignments.map((assignment) => (
+          {assignments.map((assignment, index) => (
             <ListItem
-              key={assignment._id}
+              key={`${assignment._id}-${index}`}
               sx={{
                 bgcolor: "background.paper",
                 mb: 1,
