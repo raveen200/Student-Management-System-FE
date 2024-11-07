@@ -10,7 +10,7 @@ import {
   Avatar,
   Box,
 } from "@mui/material";
-// eslint-disable-next-line react/prop-types
+
 export default function StudentPerformance({ students }) {
   return (
     <Paper sx={{ p: 3 }}>

@@ -17,11 +17,9 @@ import CustomTextField from "../components/ui/CustomTextField";
 import { useNavigate } from "react-router-dom";
 import { login } from "../services/Index";
 import { toast } from "react-toastify";
-import { setLoginEmail_Role } from "../redux/Slice";
-import { useDispatch } from "react-redux";
 
 export default function Login() {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -45,7 +43,6 @@ export default function Login() {
     try {
       const response = await login(data);
       if (response.role) {
-        dispatch(setLoginEmail_Role(response));
         toast.success("Login successful");
 
         if (response.role === "teacher") {

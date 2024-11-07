@@ -14,7 +14,7 @@ export const loginSchema = object({
     .email("Please enter a valid email"),
   password: string()
     .min(1, "Password is required")
-    .min(6, "Password must be at least 6 characters"),
+    .min(8, "Password must be at least 8 characters"),
 });
 
 export const signUpSchema = object({

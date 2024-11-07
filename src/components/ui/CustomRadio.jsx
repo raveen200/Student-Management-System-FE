@@ -37,17 +37,6 @@ function CustomRadio(props) {
                 label={capitalizeFirstLetter(role)}
               />
             ))}
-
-            {/* <FormControlLabel
-              value="student"
-              control={<Radio />}
-              label="Student"
-            />
-            <FormControlLabel
-              value="teacher"
-              control={<Radio />}
-              label="Teacher"
-            /> */}
           </RadioGroup>
         )}
       />

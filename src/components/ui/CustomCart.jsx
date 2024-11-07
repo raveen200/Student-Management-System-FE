@@ -19,7 +19,7 @@ import { useEffect, useState } from "react";
 import { addEnrollmentAction } from "../../redux/Actions";
 
 import { toast } from "react-toastify";
-// eslint-disable-next-line react/prop-types
+
 export default function CartDrawer({ open, onClose }) {
   const cartData = useSelector((state) => state.mgt.cartCourses);
   const [total, setTotal] = useState(null);

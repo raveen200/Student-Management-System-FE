@@ -22,12 +22,10 @@ import CustomRadio from "../components/ui/CustomRadio";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../services/Index";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux";
-import { setLoginEmail_Role } from "../redux/Slice";
 
 export default function SignUp() {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const [previewUrl, setPreviewUrl] = useState(null);
   const [showPassword, setShowPassword] = useState(false);
   const [role, setRole] = useState(null);
@@ -45,7 +43,7 @@ export default function SignUp() {
     formState: { errors, isSubmitting },
   } = useForm({
     resolver: yupResolver(signUpSchema),
-    mode: "onTouched",
+    mode: "onChange",
   });
 
   const onSubmit = async (data) => {
@@ -64,7 +62,6 @@ export default function SignUp() {
             ? navigate("/dashboard")
             : navigate("/teacher-dashboard");
         }
-        dispatch(setLoginEmail_Role(response));
         toast.success("Account created successfully");
       }
     } catch (error) {

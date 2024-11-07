@@ -7,10 +7,9 @@ import {
   Avatar,
   Button,
 } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 import CourseAssignments from "./CourseAssignments";
 import { useState } from "react";
-// eslint-disable-next-line react/prop-types
+
 export default function ClassSchedule({ classes }) {
   const [selectedCourse, setSelectedCourse] = useState(null);
 
